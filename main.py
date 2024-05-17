@@ -1,5 +1,6 @@
 import discord
 from discord.ext import commands
+import random
 
 intents = discord.Intents.default()
 intents.message_content = True
@@ -39,4 +40,9 @@ async def multi(ctx, a, b):
 async def expon(ctx, a, b):
     await ctx.send(f"Получилось значение = {int(a) ** int(b)}")
 
-bot.run("MTIzNjM0MTExMDA0MTczOTI3NQ.Gk4M47.Gf-VH8xzunMbo4KWyE5WnA6jHYv92Wk2nPqTdY")
+@bot.command()
+async def randnum(ctx, a, b):
+    random_number = random.choice([int(a), int(b)])
+    await ctx.send(f"Рандомное число = {random_number}")
+
+bot.run("///")
