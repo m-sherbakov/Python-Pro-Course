@@ -1,6 +1,8 @@
 import discord
 from discord.ext import commands
 import random
+import matplotlib.pyplot as plt
+import bot_logic
 
 intents = discord.Intents.default()
 intents.message_content = True
@@ -44,5 +46,13 @@ async def expon(ctx, a, b):
 async def randnum(ctx, a, b):
     random_number = random.choice([int(a), int(b)])
     await ctx.send(f"Рандомное число = {random_number}")
+
+@bot.command()
+async def bitcoin(ctx):
+    price_history = bot_logic.get_price_history()
+    plt.plot(price_history)
+    plt.savefig('bitcoin_price.png')
+    await ctx.send(f"Цена bitcoin: {round(price_history[-1])}")
+    await ctx.send(file=discord.File('bitcoin_price.png'))
 
 bot.run("///")
